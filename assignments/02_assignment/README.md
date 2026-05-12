@@ -1,56 +1,81 @@
-# Welcome to your Expo app 👋
+# 📝 Mobile Dev Cohort - Assignment 02
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This project is a modern, responsive **Notes Application** featuring dynamic theme switching and a streamlined editing experience.
 
-## Get started
+---
 
-1. Install dependencies
+## ✨ UI Showcase
 
-   ```bash
-   npm install
-   ```
+### 🎥 Demonstrations
 
-2. Start the app
+<div align="center">
+  <table border="0">
+    <tr>
+      <td align="center">
+        <p><b>Note Listing & Theme Toggle</b></p>
+        <video src="assets/note-listing-vid.mp4" width="300" controls></video>
+      </td>
+      <td align="center">
+        <p><b>Note Editor Experience</b></p>
+        <video src="assets/note-editor-screen-vid.mp4" width="300" controls></video>
+      </td>
+    </tr>
+  </table>
+</div>
 
-   ```bash
-   npx expo start
-   ```
+### 📸 Screenshots
 
-In the output, you'll find options to open the app in a
+<div align="center">
+  <table border="0">
+    <tr>
+      <td align="center">
+        <img src="assets/images/tabIcons/note-listing-dark.jpeg" width="250" style="border-radius: 10px;" />
+        <p><i>Dark Mode List</i></p>
+      </td>
+      <td align="center">
+        <img src="assets/images/tabIcons/note-listing-light.jpeg" width="250" style="border-radius: 10px;" />
+        <p><i>Light Mode List</i></p>
+      </td>
+      <td align="center">
+        <img src="assets/images/tabIcons/note-editor.jpeg" width="250" style="border-radius: 10px;" />
+        <p><i>Editor Screen</i></p>
+      </td>
+    </tr>
+  </table>
+</div>
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 📂 Project Structure
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+ assignments/02_assignment/
+ ├── assets/                 # App assets (Videos, Icons, Images)
+ ├── src/
+ │   ├── app/
+ │   │   ├── _layout.tsx     # Root layout & Navigation
+ │   │   ├── components/     # Screen Components
+ │   │   │   ├── NoteEditorScreen.tsx
+ │   │   │   └── NotesListingScreen.tsx
+ │   │   └── utils/          # Helper functions
+ ├── package.json            # Scripts & Dependencies
+ └── tsconfig.json           # TS Configuration
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-### Other setup steps
+## 🚦 Getting Started
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+### 1. Install Dependencies
+```bash
+npm install
+```
 
-## Learn more
+### 2. Run the Project
+```bash
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+---
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+<p align="center">Made with ❤️ for the Mobile Dev Cohort</p>
