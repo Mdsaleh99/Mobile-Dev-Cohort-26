@@ -8,20 +8,11 @@ This project is a modern, responsive **Notes Application** featuring dynamic the
 
 ### 🎥 Demonstrations
 
-<div align="center">
-  <table border="0">
-    <tr>
-      <td align="center">
-        <p><b>Note Listing & Theme Toggle</b></p>
-        <video src="assets/note-listing-vid.mp4" width="300" controls></video>
-      </td>
-      <td align="center">
-        <p><b>Note Editor Experience</b></p>
-        <video src="assets/note-editor-screen-vid.mp4" width="300" controls></video>
-      </td>
-    </tr>
-  </table>
-</div>
+#### Note Listing & Theme Toggle
+https://github.com/Mdsaleh99/Mobile-Dev-Cohort-26/blob/main/assignments/02_assignment/assets/note-listing-vid.mp4
+
+#### Note Editor Experience
+https://github.com/Mdsaleh99/Mobile-Dev-Cohort-26/blob/main/assignments/02_assignment/assets/note-editor-screen-vid.mp4
 
 ### 📸 Screenshots
 
