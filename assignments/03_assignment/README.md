@@ -3,7 +3,7 @@
 A React Native food delivery app built with Expo demonstrating nested navigation patterns including stack, tab, and drawer navigators with deep linking support.
 
 ## Demo
-
+https://github.com/Mdsaleh99/Mobile-Dev-Cohort-26/blob/main/assignments/02_assignment/assets/video.mp4
 <video src="assets/app-img/video.mp4" controls width="300"></video>
 
 ## Screenshots
