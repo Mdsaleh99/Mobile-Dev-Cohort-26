@@ -4,6 +4,7 @@ import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// https://docs.expo.dev/versions/latest/sdk/sqlite/
 
 const db = SQLite.openDatabaseSync("demo.db");
 
