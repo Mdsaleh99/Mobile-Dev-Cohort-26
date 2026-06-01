@@ -8,7 +8,7 @@ import {
   View
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+// https://docs.expo.dev/versions/latest/sdk/filesystem/
 const index = () => {
   const [output, setOutput] = useState<string>('');
   const [downloadedImageUri, setDownloadedImageUri] = useState<string | null>(null);
