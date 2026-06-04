@@ -1,56 +1,119 @@
-# Welcome to your Expo app 👋
+# Driving Safety Score
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Project Overview
 
-## Get started
+This is an Expo-based mobile app that simulates a driving safety score using live device sensor data.
 
-1. Install dependencies
+The user starts a drive session, moves the phone to mimic driving behavior, and the app detects unsafe motion patterns such as harsh braking, harsh acceleration, sharp turns, aggressive steering, excessive device movement, and possible phone handling.
+
+Each detected event adds a penalty to the session score. The UI then shows the live score, safety rating, event breakdown, event timeline, sensor availability, and the thresholds used for detection.
+
+## Tech Stack Used
+
+- Expo SDK 55
+- React 19
+- React Native 0.83
+- TypeScript
+- Expo Router
+- `expo-sensors`
+- `expo-status-bar`
+- `react-native-safe-area-context`
+- `react-native-reanimated`
+
+## Sensors Used
+
+The app reads these Expo sensors:
+
+- Accelerometer
+- Gyroscope
+- Device Motion
+- Magnetometer
+
+How they are used in the app:
+
+- Accelerometer: used for harsh braking, harsh acceleration, and excessive movement detection.
+- Gyroscope: used for sharp turn and aggressive steering detection.
+- Device Motion: used for rotation-rate-based detection and as an additional movement signal.
+- Magnetometer: captured and displayed in the sensor status card, but not used in event detection.
+
+## Event Detection Strategy
+
+Event detection happens only while a drive session is active.
+
+The hook in `src/hooks/useDriveSession.ts` subscribes to sensor updates and calls `detectDriveEvents()` whenever fresh readings arrive. The detector checks the latest sensor snapshot against a fixed rule set and creates one or more events when thresholds are crossed.
+
+Important details:
+
+- Sensor updates are sampled every 200 ms.
+- Each event type has a cooldown of 1200 ms to prevent repeated scoring from the same motion.
+- Multiple event types can be detected from the same sensor snapshot.
+- Events are inserted into the timeline with the newest event first.
+
+## Threshold Values Chosen
+
+The thresholds are defined in `src/lib/driveRules.ts` and mirrored in the UI.
+
+- Harsh Braking: `Accelerometer Y < -1.35g`
+- Harsh Acceleration: `Accelerometer Y > 1.35g`
+- Sharp Turn: `max(|gyroscope.z|, |device motion rotation.z|) > 2.2 rad/s`
+- Aggressive Steering: `Gyroscope magnitude > 3.2 rad/s`
+- Excessive Device Movement: `Acceleration magnitude > 2.4g`
+- Possible Phone Handling: `Acceleration magnitude > 1.8g and max(gyroscope magnitude, device motion rotation magnitude) > 2.5 rad/s`
+
+## Driving Score Calculation Logic
+
+The session starts at `100`.
+
+Each event subtracts a fixed number of points:
+
+- Harsh Braking: 5
+- Harsh Acceleration: 5
+- Sharp Turn: 3
+- Aggressive Steering: 4
+- Excessive Device Movement: 4
+- Possible Phone Handling: 10
+
+Score calculation:
+
+- Start with 100 points.
+- Subtract the total points from all detected events.
+- Clamp the final score at a minimum of 0.
+
+Safety ratings are derived from the score:
+
+- `90-100`: Excellent
+- `75-89`: Good
+- `60-74`: Moderate
+- `0-59`: Risky
+
+## How to Run Locally
+
+1. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Start the Expo dev server:
 
    ```bash
-   npx expo start
+   npm run start
    ```
 
-In the output, you'll find options to open the app in a
+3. Optional platform shortcuts:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```bash
+   npm run android
+   npm run ios
+   npm run web
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Assumptions Made
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- The app is intended as a sensor-based simulation, not a real vehicle telematics system.
+- The phone is expected to be physically moved by hand to simulate driving behavior.
+- Sensor availability can vary by device, so the UI checks availability before subscribing.
+- The accelerometer and gyroscope are the primary signals for event detection.
+- Device Motion rotation rate is converted from degrees per second to radians per second before detection.
+- Magnetometer data is informational only in the current implementation.
+- The scoring rules are intentionally simple and deterministic so the assignment output is easy to verify.
